@@ -1,0 +1,43 @@
+# Copy to terraform.tfvars and fill in your values.
+# NEVER commit terraform.tfvars — it contains secrets.
+
+# ── Hostinger ─────────────────────────────────────────────────────────────────
+# Generate at: hpanel.hostinger.com → top-right avatar → API
+hostinger_api_token = "your-hostinger-api-token"
+
+# ── VPS ───────────────────────────────────────────────────────────────────────
+hostname = "djtools"
+
+# Full plan slug — run `terraform init && terraform apply -target=data.hostinger_vps_plans.all`
+# then `terraform output available_plans` to see all options.
+# Common examples:
+#   hostingercom-vps-kvm1-usd-1m   (KVM 1, cheapest)
+#   hostingercom-vps-kvm2-usd-1m   (KVM 2)
+#   hostingercom-vps-kvm4-usd-1m   (KVM 4)
+vps_plan_id = "hostingercom-vps-kvm2-usd-1m"
+
+# City of desired datacenter — run `terraform output available_datacenters` to list.
+# Examples: "Ashburn", "Amsterdam", "Singapore", "São Paulo", "Vilnius"
+datacenter_city = "Ashburn"
+
+# Exact OS template name — run `terraform output available_templates` to list.
+os_template_name = "Ubuntu 22.04 LTS"
+
+# Root password for VPS emergency console access
+vps_root_password = "change-me-strong-password"
+
+# Paths to your SSH key pair
+ssh_public_key_path  = "~/.ssh/id_ed25519.pub"
+ssh_private_key_path = "~/.ssh/id_ed25519"
+
+# ── PostgreSQL ─────────────────────────────────────────────────────────────────
+db_name     = "djtools"
+db_user     = "djtools_user"
+db_password = "change-me-another-strong-password"
+
+# ── Server user ───────────────────────────────────────────────────────────────
+# Non-root sudo account created on first boot; root SSH is disabled after.
+ops_user = "ops"
+
+# ── App ────────────────────────────────────────────────────────────────────────
+app_root = "/var/www/djtools"
