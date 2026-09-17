@@ -1,14 +1,16 @@
 locals {
-  spacebooker_nginx_conf = templatefile("${path.module}/templates/nginx_app.conf.tpl", {
-    port     = var.spacebooker_port
-    app_root = var.spacebooker_app_root
+  spacebooker_nginx_conf = templatefile("${path.module}/templates/nginx_ssl_port.conf.tpl", {
+    cert_name = "spacebooker"
+    port      = var.spacebooker_port
+    app_root  = var.spacebooker_app_root
   })
 }
 
 resource "null_resource" "spacebooker_nginx_setup" {
   depends_on = [
     hostinger_vps.djtools,
-    null_resource.nginx_setup,   # ensure nginx is already installed
+    null_resource.nginx_setup,
+    null_resource.ssl_certs,
   ]
 
   triggers = {

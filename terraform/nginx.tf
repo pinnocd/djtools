@@ -1,11 +1,15 @@
 locals {
-  nginx_conf = templatefile("${path.module}/templates/nginx.conf.tpl", {
-    app_root = var.app_root
+  nginx_conf = templatefile("${path.module}/templates/nginx_ssl_default.conf.tpl", {
+    cert_name = "djtools"
+    app_root  = var.app_root
   })
 }
 
 resource "null_resource" "nginx_setup" {
-  depends_on = [hostinger_vps.djtools]
+  depends_on = [
+    hostinger_vps.djtools,
+    null_resource.ssl_certs,
+  ]
 
   triggers = {
     vps_id     = hostinger_vps.djtools.id

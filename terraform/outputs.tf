@@ -5,7 +5,7 @@ output "server_ip" {
 
 output "app_url" {
   description = "URL to access the DJ Stems Studio app"
-  value       = "http://${local.server_ip}"
+  value       = "https://${local.server_ip}"
 }
 
 output "db_connection_string" {
@@ -16,7 +16,7 @@ output "db_connection_string" {
 
 output "spacebooker_url" {
   description = "URL to access the Spacebooker app"
-  value       = "http://${local.server_ip}:${var.spacebooker_port}"
+  value       = "https://${local.server_ip}:${var.spacebooker_port}"
 }
 
 output "spacebooker_db_connection_string" {

@@ -20,6 +20,7 @@ resource "null_resource" "firewall_setup" {
       "sudo ufw default allow outgoing",
       "sudo ufw allow 22/tcp comment 'SSH'",
       "sudo ufw allow 80/tcp comment 'HTTP'",
+      "sudo ufw allow 443/tcp comment 'HTTPS'",
       "sudo ufw allow ${var.spacebooker_port}/tcp comment 'Spacebooker'",
       "sudo ufw deny 5432/tcp comment 'Block external Postgres'",
       "sudo ufw --force enable",
